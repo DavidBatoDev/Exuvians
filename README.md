@@ -1,6 +1,8 @@
 # Next.js 14 + Firebase Project with TailwindCSS Auto-Sorting
 Made by Adrian Angelo Abelarde & Dzelle Faith Tan
 
+![image](https://github.com/drianlarde/nextjs14-server-actions-firebase-boilerplate/assets/69323240/7b574986-e84b-4163-9027-7a5d12ac7caa)
+
 This project demonstrates the integration of Next.js 14 Server Actions with Firebase for building scalable web applications, leveraging the utility-first CSS framework TailwindCSS with auto-sorting for a clean and maintainable codebase.
 
 ## Features
