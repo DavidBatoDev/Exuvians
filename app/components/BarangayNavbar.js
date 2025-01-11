@@ -6,7 +6,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/config/firebase"; // Update with your Firebase config path
 
-export default function Navbar({ navbarBg }) {
+export default function BarangayNavbar({ navbarBg }) {
   const [user, setUser] = useState(null);
   const [userBarangay, setUserBarangay] = useState(null);
   const [currentNavbarBg, setCurrentNavbarBg] = useState(navbarBg);
