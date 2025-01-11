@@ -83,7 +83,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  background-color: rgba(1, 0, 0, 0.5); /* Semi-transparent black */
   z-index: 9999; /* Ensure it appears on top */
   display: flex;
   justify-content: center;
