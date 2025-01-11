@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/config/firebase";
 import registerUser from "@/lib/actions/registerUser"; // Action to register the user
 import { useRouter } from "next/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
 import FloatingAlert from "../../components/FloatingAlert"; // Reusable alert component
 
-export default function BarangayRegisterPage() {
+export default function BarangayAdminRegisterPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,9 +17,29 @@ export default function BarangayRegisterPage() {
     barangay: "",
     birthdate: "",
   });
+  const [barangays, setBarangays] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ message: "", severity: "", show: false });
   const router = useRouter();
+
+  // Fetch barangays from Firestore
+  useEffect(() => {
+    const fetchBarangays = async () => {
+      try {
+        const barangayCollection = collection(db, "barangay");
+        const barangaySnapshot = await getDocs(barangayCollection);
+        const barangayList = barangaySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBarangays(barangayList);
+      } catch (error) {
+        console.error("Error fetching barangays:", error);
+      }
+    };
+
+    fetchBarangays();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +62,7 @@ export default function BarangayRegisterPage() {
         address: { barangay },
         birthdate: new Date(birthdate), // Convert birthdate to Date object
         role: "barangay_admin", // Assign the role as "barangay_admin"
-        barangayId: barangay,
+        barangayId: barangay, // Use selected barangay ID
       });
 
       setAlert({ message: "Registration successful! Redirecting to login...", severity: "success", show: true });
@@ -101,15 +123,20 @@ export default function BarangayRegisterPage() {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroon"
           />
-          <input
-            type="text"
+          <select
             name="barangay"
-            placeholder="Barangay"
             value={formData.barangay}
             onChange={handleChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroon"
-          />
+          >
+            <option value="">Select Barangay</option>
+            {barangays.map((barangay) => (
+              <option key={barangay.id} value={barangay.id}>
+                {barangay.name}
+              </option>
+            ))}
+          </select>
           <input
             type="date"
             name="birthdate"
@@ -137,7 +164,7 @@ export default function BarangayRegisterPage() {
               Login
             </button>
           </p>
-          </div>
+        </div>
       </div>
     </div>
   );

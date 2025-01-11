@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/config/firebase";
 import registerUser from "@/lib/actions/registerUser";
 import { useRouter } from "next/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -18,9 +20,29 @@ export default function RegisterPage() {
     birthdate: "",
     role: "citizen",
   });
+  const [barangays, setBarangays] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ message: "", severity: "", show: false });
   const router = useRouter();
+
+  // Fetch barangays from Firestore
+  useEffect(() => {
+    const fetchBarangays = async () => {
+      try {
+        const barangayCollection = collection(db, "barangay");
+        const barangaySnapshot = await getDocs(barangayCollection);
+        const barangayList = barangaySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBarangays(barangayList);
+      } catch (error) {
+        console.error("Error fetching barangays:", error);
+      }
+    };
+
+    fetchBarangays();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,13 +64,13 @@ export default function RegisterPage() {
         address: { street, barangay, city },
         birthdate: new Date(birthdate),
         role: "citizen",
-        barangayId: barangay,
+        barangayId: barangay, // Use selected barangay ID
       });
 
       setAlert({ message: "Registration successful! Redirecting to login...", severity: "success", show: true });
       setTimeout(() => {
         router.push("/login");
-      }, 2000); // Redirect after success
+      }, 2000);
     } catch (error) {
       setAlert({ message: error.message, severity: "error", show: true });
     } finally {
@@ -79,9 +101,10 @@ export default function RegisterPage() {
           <input
             type="email"
             name="email"
-            placeholder="Email (optional)"
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
+            required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroon"
           />
           <input
@@ -111,15 +134,20 @@ export default function RegisterPage() {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroon"
           />
-          <input
-            type="text"
+          <select
             name="barangay"
-            placeholder="Barangay"
             value={formData.barangay}
             onChange={handleChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroon"
-          />
+          >
+            <option value="">Select Barangay</option>
+            {barangays.map((barangay) => (
+              <option key={barangay.id} value={barangay.id}>
+                {barangay.name}
+              </option>
+            ))}
+          </select>
           <input
             type="text"
             name="city"
