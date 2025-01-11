@@ -8,6 +8,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import ImageIcon from "@mui/icons-material/Image";
 import { createAnnouncement } from "../../../lib/actions/announcement"; // Import the Firestore function
 import uploadFile from '../../../lib/actions/uploadFile'
+import fetchUserInfo from "@/lib/actions/fetchUserInfo";
 
 // Dynamically import React Quill to prevent SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -20,8 +21,6 @@ export default function CreateAnnouncementPage() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const barangayId = "123"; // Replace with actual barangay ID from context or props
 
   // Handle image upload using react-dropzone
   const onDrop = (acceptedFiles) => {
@@ -49,6 +48,8 @@ export default function CreateAnnouncementPage() {
 
     try {
       // Upload image to Firebase Storage
+      const userInfo = await fetchUserInfo();
+      const barangayId = userInfo.barangayId;
       let imageUrl = "";
       if (image?.file) {
         imageUrl = await uploadFile(image.file, `announcements/${barangayId}`);
@@ -67,7 +68,8 @@ export default function CreateAnnouncementPage() {
 
       console.log("Announcement created successfully:", createdAnnouncement);
       alert("Announcement Created!");
-      // router.push("/announcements"); // Navigate to the announcements page
+      router.push("/barangay"); // Navigate to the announcements page
+      
     } catch (error) {
       console.error("Error creating announcement:", error);
       alert("Failed to create announcement. Please try again.");

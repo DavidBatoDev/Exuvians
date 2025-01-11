@@ -14,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { createProject } from "../../../lib/actions/baragayProjects"
 import uploadFile from "../../../lib/actions/uploadFile"
+import  fetchUserInfo  from "../../../lib/actions/fetchUserInfo";
 
 // Dynamically import React Quill to prevent SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -57,9 +58,14 @@ export default function CreateProjectPage() {
         images.map((file) => uploadFile(file, "barangay-projects"))
       );
 
+      const userInfo = await fetchUserInfo(); // Fetch user data
+      const barangayId = userInfo.barangayId;
+
+      console.log("User info", userInfo)
+
       // Create the project in Firestore
       const projectData = {
-        barangayId: "sampleBarangayId", // Replace with actual barangayId
+        barangayId: barangayId, // Replace with actual barangayId
         title,
         description,
         images: imageUrls,
@@ -72,7 +78,7 @@ export default function CreateProjectPage() {
       console.log("Project created:", newProject);
 
       alert("Project created successfully!");
-      router.push("/projects"); // Redirect to projects page or any other page
+      router.push("/barangay"); // Redirect to projects page or any other page
     } catch (error) {
       console.error("Error creating project:", error.message);
       alert("Failed to create project. Please try again.");
@@ -158,12 +164,12 @@ export default function CreateProjectPage() {
                     alt={`Preview ${index}`}
                     className="w-full h-full object-cover rounded"
                   />
-                  <IconButton
+                  <div
                     onClick={() => handleRemoveImage(index)}
-                    className="absolute top-2 left-2 bg-white bg-opacity-50 group-hover:bg-opacity-100"
+                    className="absolute top-5 right-3 cursor-pointer rounded-full bg-opacity-50 group-hover:bg-opacity-100 "
                   >
                     <CloseIcon />
-                  </IconButton>
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
