@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 export default function Container({ children, className = '' }) {
     return (
         <section
-            className={cn('px-[40px] md:px-[100px] lg:px-[164px]', className)}
+            className={cn('px-[40px] md:px-[100px] lg:px-[100px]', className)}
         >
             {children}
         </section>

@@ -10,7 +10,7 @@ export default function Navbar() {
         // className="absolute inset-0 bg-cover bg-center blur-md border border-black-900"
         className="absolute inset-0 bg-cover bg-center border border-black"
         style={{
-          backgroundImage: "url('/path-to-your-image.jpg')", // Replace with your image path
+          backgroundImage: "url('/images/navbar-bg.png')",
         }}
       ></div>
 
