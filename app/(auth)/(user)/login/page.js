@@ -118,13 +118,7 @@ export default function LoginPage() {
               Log in to {selectedBarangay} Portal
             </h1>
             <p className="text-center text-gray-500 mb-6">
-              Don’t have an account?{" "}
-              <button
-                onClick={handleRegisterNavigation}
-                className="text-blue-600 hover:underline"
-              >
-                Sign up
-              </button>
+              Logging in as Barangay Official of this Barangay
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative">
