@@ -42,7 +42,7 @@ export default function Home() {
                             </p>
                             <button
                                 className="mt-4 px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded hover:bg-blue-600 transition"
-                                onClick={() => window.location.href = '/barangay/payatas'}
+                                onClick={() => window.location.href = '/barangay/sZzMpdqxS8viDAn7nrfd'}
                             >
                                 Learn More
                             </button>
@@ -56,7 +56,7 @@ export default function Home() {
                             </p>
                             <button
                                 className="mt-4 px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded hover:bg-blue-600 transition"
-                                onClick={() => window.location.href = '/barangay/bagong-silangan'}
+                                onClick={() => window.location.href = '/barangay/LnbXpjlCb1Zj4jwb0wkS'}
                             >
                                 Learn More
                             </button>
@@ -70,7 +70,7 @@ export default function Home() {
                             </p>
                             <button
                                 className="mt-4 px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded hover:bg-blue-600 transition"
-                                onClick={() => window.location.href = '/barangays'}
+                                onClick={() => window.location.href = '/browse-barangay'}
                             >
                                 Learn More
                             </button>

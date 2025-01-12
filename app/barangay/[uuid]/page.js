@@ -268,9 +268,9 @@ export default function BarangayPage() {
 
 
       {/* In the third page list all the Eservices */}
-      <div className="py-16">
+      <div className="py-16 bg-[#05184A]">
         <div className="container mx-auto px-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">E-Services</h2>
+          <h2 className="text-3xl font-bold text-gray-100 mb-10 text-center">E-Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {eServices.map((service, index) => {
             const Icon = icons[service.title] || WorkIcon; // Default to WorkIcon if no match
