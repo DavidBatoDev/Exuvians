@@ -6,7 +6,9 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/config/firebase"; // Update with your Firebase config path
 
-export default function Navbar({ navbarBg }) {
+const navbarBg = "/images/navbar-bg-point1.png"; // Default background
+
+export default function Navbar() {
   const [user, setUser] = useState(null);
   const [userBarangay, setUserBarangay] = useState(null);
   const [currentNavbarBg, setCurrentNavbarBg] = useState(navbarBg);
@@ -34,7 +36,7 @@ export default function Navbar({ navbarBg }) {
             if (barangayName === "Payatas") {
               setCurrentNavbarBg("/images/navbar-bg-point1.png");
             } else if (barangayName === "Bagong Silangan") {
-              setCurrentNavbarBg("/images/navbar-bg-point2.jpg");
+              setCurrentNavbarBg("/images/navbar-bg-point1.png");
             } else {
               setCurrentNavbarBg(navbarBg); // Default background
             }
@@ -64,7 +66,7 @@ export default function Navbar({ navbarBg }) {
       <div className="relative">
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center border border-black"
+          className="absolute inset-0 bg-cover bg-center border border-black bg-[#05184A]"
           style={{
             backgroundImage: `url(${currentNavbarBg})`, // Use the updated navbar background
           }}
@@ -75,19 +77,15 @@ export default function Navbar({ navbarBg }) {
           {/* Left Section */}
           <div className="flex items-center space-x-4">
             <div className="w-10 h-10 bg-gray-400 rounded-full"></div>
-            <div className="w-10 h-10 bg-gray-400 rounded-full"></div>
           </div>
 
           {/* Center Section */}
           <div className="flex items-center space-x-6">
-            <Link href="/announcements" className="hover:underline">
-              Announcements
+            <Link href="/browse-barangay" className="hover:underline">
+              Browse barangay
             </Link>
             <Link href="/concerns" className="hover:underline">
               Concern
-            </Link>
-            <Link href="/about" className="hover:underline">
-              About Us
             </Link>
             <Link href="/register" className="hover:underline">
               Register

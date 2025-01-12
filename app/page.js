@@ -17,7 +17,7 @@ export default function Home() {
                     </p>
                     <button
                         className="mt-6 px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
-                        onClick={() => window.location.href = '/barangays'}
+                        onClick={() => window.location.href = '/browse-barangay'}
                     >
                         Browse Barangays
                     </button>

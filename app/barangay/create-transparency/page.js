@@ -55,7 +55,7 @@ export default function CreateTransparencyPage() {
       console.log("Transparency Record Created:", newRecord);
 
       alert("Transparency record created successfully!");
-      router.push("/transparency"); // Navigate to the transparency records page
+      router.push("/barangay"); // Navigate to the transparency records page
     } catch (error) {
       console.error("Error creating transparency record:", error.message);
       alert("Failed to create transparency record. Please try again.");

@@ -270,10 +270,16 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         {eServices.length > 0 ? (
           eServices.map((service) => (
-            <div key={service.id} className="bg-white shadow-lg rounded-lg">
+            <div key={service.id} className="bg-white shadow-lg rounded-lg max-h-60 overflow-hidden">
               <div className="p-4">
                 <h3 className="text-lg font-bold mb-2">{service.title}</h3>
                 {/* dangerous html description */}
+                <button
+                  onClick={() => handleOpenModal(service)}
+                  className="text-maroon font-semibold underline mt-2 inline-block"
+                >
+                  Edit
+                </button>
                 <div
                   className="text-gray-700"
                   dangerouslySetInnerHTML={{ __html: service.description }}
@@ -288,12 +294,7 @@ export default function Dashboard() {
                     Visit Service
                   </a>
                 )}
-                <button
-                  onClick={() => handleOpenModal(service)}
-                  className="text-maroon font-semibold underline mt-2 inline-block"
-                >
-                  Edit
-                </button>
+  
               </div>
             </div>
           ))
