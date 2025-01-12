@@ -1,14 +1,16 @@
-# Innolympics Web
+# GovKonnect
 
-Innolympics Web is a modern web application designed to showcase barangay-level projects, announcements, and e-services
+ GovKonnect Web
 
-## Features
+GovKonnect Web is a modern platform showcasing barangay-level initiatives, fostering transparency, engagement, and accountability in Philippine governance. It aligns with SDG 16 (Strong Institutions), SDG 9 (Innovation), and SDG 10 (Reduced Inequalities), addressing key challenges like corruption, inefficiency, and limited citizen participation.
 
-- **Interactive Barangay Map**: Visualize barangays on a dynamic map.
-- **Announcements**: Display the latest announcements with detailed summaries.
-- **Projects**: Showcase barangay projects with descriptions and images.
-- **E-Services**: Access e-services offered by barangays with easy navigation.
-- **Authentication**: Support for user login and registration.
+## Key Features
+
+- **Interactive Barangay Map**: Navigate barangay information visually.
+- **Latest Announcements**: AI-powered summarization of barangay updates.
+- **Barangay Projects**: Display project details with dynamic images.
+- **E-Services**: Seamless access to digital services.
+- **Transparency Documents**: Enhance visibility and trust.
 
 ## Tech Stack
 - **Frontend**: React, Next.js 13+ with App Router
